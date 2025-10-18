@@ -2,106 +2,114 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Modern Calculator</title>
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body
-    class="font-[Poppins] bg-gradient-to-br from-sky-50 to-gray-200 flex items-center justify-center min-h-screen p-4">
+  class="font-[Poppins,sans-serif] bg-gray-100 bg-gradient-to-br from-sky-50 to-gray-200 flex items-center justify-center min-h-screen p-4">
 
-    <div class="flex flex-col md:flex-row gap-6 w-full max-w-4xl">
-        <!-- KHUNG MÁY TÍNH -->
-        <div class="flex-1 bg-white/70 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-gray-200">
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8 tracking-wide">Calculator</h1>
+  <div class="flex flex-col md:flex-row gap-6 w-full max-w-4xl">
+    <!-- KHUNG MÁY TÍNH -->
+    <div class="flex-1 min-w-[280px] bg-white/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-gray-200">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 tracking-wide">Calculator</h1>
 
-            <form id="calculatorForm" class="space-y-6">
+      <!-- Màn hình hiển thị -->
+      <div class="bg-gray-50 p-4 mb-4 rounded-xl border border-gray-200 text-right shadow-inner">
+        <p id="expression" class="text-gray-500 text-sm h-5 mb-1"></p>
+        <input id="result" type="text" readonly
+          class="w-full bg-gray-50 text-4xl font-semibold text-gray-800 text-right focus:outline-none">
+      </div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label for="num1" class="font-semibold text-gray-600 mb-1 block">Số thứ nhất</label>
-                        <input type="text" id="num1" placeholder="Nhập số..."
-                            class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200">
-                    </div>
-                    <div>
-                        <label for="num2" class="font-semibold text-gray-600 mb-1 block">Số thứ hai</label>
-                        <input type="text" id="num2" placeholder="Nhập số..."
-                            class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200">
-                    </div>
-                </div>
+      <!-- NÚT BẤM -->
+      <div class="grid grid-cols-4 gap-3 sm:gap-2">
+        <!-- Hàng 1 -->
+        <button id="ceBtn"
+          class="bg-gray-200 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-300 transition">CE</button>
+        <button id="cBtn"
+          class="bg-gray-200 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-300 transition">C</button>
+        <button id="backspaceBtn"
+          class="bg-gray-200 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-300 transition">⌫</button>
+        <button data-op="/"
+          class="bg-indigo-500 text-white font-medium py-3 rounded-lg hover:bg-indigo-600 transition">÷</button>
 
-                <div>
-                    <label class="font-semibold text-gray-600 mb-2 block">Chọn phép toán</label>
-                    <div class="grid grid-cols-4 gap-3">
-                        <label class="relative">
-                            <input type="radio" name="operator" value="+" class="peer absolute opacity-0">
-                            <span
-                                class="w-full h-full flex items-center justify-center p-3 border border-gray-300 rounded-lg cursor-pointer bg-white text-gray-700 font-semibold transition-all duration-200 peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:border-indigo-600 hover:border-indigo-400">
-                                +
-                            </span>
-                        </label>
-                        <label class="relative">
-                            <input type="radio" name="operator" value="-" class="peer absolute opacity-0">
-                            <span
-                                class="w-full h-full flex items-center justify-center p-3 border border-gray-300 rounded-lg cursor-pointer bg-white text-gray-700 font-semibold transition-all duration-200 peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:border-indigo-600 hover:border-indigo-400">
-                                -
-                            </span>
-                        </label>
-                        <label class="relative">
-                            <input type="radio" name="operator" value="*" class="peer absolute opacity-0">
-                            <span
-                                class="w-full h-full flex items-center justify-center p-3 border border-gray-300 rounded-lg cursor-pointer bg-white text-gray-700 font-semibold transition-all duration-200 peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:border-indigo-600 hover:border-indigo-400">
-                                ×
-                            </span>
-                        </label>
-                        <label class="relative">
-                            <input type="radio" name="operator" value="/" class="peer absolute opacity-0">
-                            <span
-                                class="w-full h-full flex items-center justify-center p-3 border border-gray-300 rounded-lg cursor-pointer bg-white text-gray-700 font-semibold transition-all duration-200 peer-checked:bg-indigo-600 peer-checked:text-white peer-checked:border-indigo-600 hover:border-indigo-400">
-                                ÷
-                            </span>
-                        </label>
-                    </div>
-                </div>
+        <!-- Hàng 2 -->
+        <button data-num="7"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">7</button>
+        <button data-num="8"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">8</button>
+        <button data-num="9"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">9</button>
+        <button data-op="*"
+          class="bg-indigo-500 text-white font-medium py-3 rounded-lg hover:bg-indigo-600 transition">×</button>
 
-                <button type="button" id="calculateBtn"
-                    class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform duration-200 transform hover:-translate-y-1">
-                    Tính toán
-                </button>
+        <!-- Hàng 3 -->
+        <button data-num="4"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">4</button>
+        <button data-num="5"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">5</button>
+        <button data-num="6"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">6</button>
+        <button data-op="-"
+          class="bg-indigo-500 text-white font-medium py-3 rounded-lg hover:bg-indigo-600 transition">−</button>
 
-                <div>
-                    <label for="result" class="font-semibold text-gray-600 mb-1 block">Kết quả</label>
-                    <input type="text" id="result" readonly
-                        class="w-full p-3 text-2xl font-bold text-gray-900 bg-gray-100 border-2 border-gray-300 rounded-lg text-center">
-                </div>
+        <!-- Hàng 4 -->
+        <button data-num="1"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">1</button>
+        <button data-num="2"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">2</button>
+        <button data-num="3"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">3</button>
+        <button data-op="+"
+          class="bg-indigo-500 text-white font-medium py-3 rounded-lg hover:bg-indigo-600 transition">+</button>
 
-                <div class="h-6 text-center">
-                    <p id="notification" class="text-red-600 text-sm font-semibold"></p>
-                </div>
-            </form>
-        </div>
-        <!-- LỊCH SỬ -->
-        <div
-            class="w-full md:w-72 bg-white/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-gray-200 flex flex-col">
-            <div class="flex justify-between items-center mb-3">
-                <h2 class="text-xl font-semibold text-gray-700">Lịch sử</h2>
-                <button id="clearHistory" class="text-sm text-red-500 hover:text-red-700">🗑 Xóa</button>
-            </div>
-            <div id="historyList" class="flex-1 overflow-y-auto max-h-[520px] space-y-2">
-                <p class="text-gray-400 text-sm text-center">Chưa có phép tính nào</p>
-            </div>
-        </div>
+        <!-- Hàng 5 -->
+        <button id="negateBtn"
+          class="bg-gray-200 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-300 transition">±</button>
+        <button data-num="0"
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">0</button>
+        <button data-num="."
+          class="bg-gray-100 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-200 transition">.</button>
+        <button id="calculateBtn"
+          class="bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">=</button>
+
+        <!-- Hàng 6 -->
+        <button data-op="%"
+          class="bg-gray-200 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-300 transition">%</button>
+        <button data-op="sqrt"
+          class="bg-gray-200 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-300 transition col-span-3">√</button>
+      </div>
+
+      <!-- THÔNG BÁO LỖI -->
+      <div class="h-6 text-center mt-3">
+        <p id="notification" class="text-red-600 text-sm font-semibold"></p>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- KHUNG LỊCH SỬ -->
+    <div class="w-full md:w-72 bg-white/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl border border-gray-200 flex flex-col min-w-[240px]">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-semibold text-gray-700">Lịch sử</h2>
+        <button id="clearHistory" class="text-sm text-red-500 hover:text-red-700">🗑 Xóa</button>
+      </div>
+      <div id="historyList" class="flex-1 overflow-y-auto max-h-[520px] space-y-2">
+        <p class="text-gray-400 text-sm text-center">Chưa có phép tính nào</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
